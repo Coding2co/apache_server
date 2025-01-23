@@ -3,7 +3,7 @@
 
 resource "aws_security_group" "acn_sg" {
   name   = "mysecuritygroup"
-  vpc_id = "vpc-07e6aabf13649c7b5"
+  vpc_id = "vpc-0780fe3cca77ae47b"
 
   # SSH access from anywhere
   ingress {
