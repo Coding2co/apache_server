@@ -1,7 +1,7 @@
 
 resource "aws_security_group" "acn_sg" {
   name   = "mysecuritygroup"
-  vpc_id = "vpc-0780fe3cca77ae47b"  # Change with your VPC ID
+  vpc_id = "vpc-03a5ec0ed26b297db"  # Change with your VPC ID
 
   # SSH access from a specific IP (recommended)
   ingress {
