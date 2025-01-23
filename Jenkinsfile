@@ -2,11 +2,10 @@ pipeline {
     agent any
 
     environment {
-        ANSIBLE_DIR           = 'ansible'
-        INVENTORY_PATH        = './aws_ec2.yaml'
-        TERRAFORM_DIR         = 'terraform'
-        AWS_DEFAULT_REGION    = 'us-east-1'  // Change to your region
-        PRIVATE_KEY           = credentials('node_private_key')  // Private key stored in Jenkins credentials. Please cross-check credentials ID.
+        ANSIBLE_DIR        = 'ansible'
+        INVENTORY_PATH     = './aws_ec2.yaml'
+        TERRAFORM_DIR      = 'terraform'
+        AWS_DEFAULT_REGION = 'us-east-1'
     }
 
     stages {
@@ -27,12 +26,14 @@ pipeline {
                     echo "Running Ansible Playbooks..."
                     sh 'ansible-inventory -i "${INVENTORY_PATH}" --graph'
                     echo "Installing Apache Server on EC2 Instance"
-                    sh """
-                    ansible-playbook -i "${INVENTORY_PATH}" playbook.yml \
-                    --user ec2-user \
-                    --private-key "${PRIVATE_KEY}" \
-                    --limit target
-                    """
+                    withCredentials([file(credentialsId: 'node_private_key', variable: 'PRIVATE_KEY_PATH')]) {
+                        sh """
+                            ansible-playbook -i "${INVENTORY_PATH}" playbook.yml \
+                            --user ec2-user \
+                            --private-key "${PRIVATE_KEY_PATH}" \
+                            --limit target
+                        """
+                    }
                 }
             }
         }
