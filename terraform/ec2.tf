@@ -1,5 +1,5 @@
-variable "aws_access_key" {}
-variable "aws_secret_key" {}
+// variable "aws_access_key" {}
+// variable "aws_secret_key" {}
 
 resource "aws_security_group" "acn_sg" {
   name   = "mysecuritygroup"
