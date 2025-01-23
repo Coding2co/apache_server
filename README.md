@@ -1,5 +1,5 @@
 # apache_server
-Automating the installation of the Apache server on an EC2 instance, provisioned with Terraform, and orchestrated via Jenkins using Ansible.
+This repository automates the setup of an Apache server on an EC2 instance using **Terraform**, **Ansible**, and **Jenkins** for continuous integration. The EC2 instance is provisioned on AWS, and Apache is installed and configured through an Ansible playbook. This project uses **dynamic inventory** with Ansible to automatically discover EC2 instances created by Terraform.
 
 **NOTE**
  - Prefer using the Amazon Linux AMI, as it includes pre-installed software packages that simplify the setup process.
@@ -22,3 +22,18 @@ Automating the installation of the Apache server on an EC2 instance, provisioned
       [ssh_connection]
       ssh_args = -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
  ```
+
+# Required Tools
+
+Make sure the following tools are installed:
+
+1. **Python**: Needed for Ansible dynamic inventory to make interactions with AWS.
+2. **Pip**: Python package manager to install libraries.
+3. **Boto3**: AWS SDK for Python to manage AWS resources.
+4. **Botocore**: Supports Boto3 for AWS service access.
+5. **Ansible**: Automation tool for configuring and managing servers.
+6. **Terraform**: Tool for provisioning cloud resources (like EC2) on AWS.
+7. **Jenkins**: Automation server for CI/CD pipelines.
+8. **Java**: Required to run Jenkins.
+9. **Git**: Version control for managing code and integrations.
+
