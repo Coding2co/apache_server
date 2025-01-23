@@ -3,14 +3,14 @@
 
 resource "aws_security_group" "acn_sg" {
   name   = "mysecuritygroup"
-  vpc_id = "vpc-0780fe3cca77ae47b"
+  vpc_id = "vpc-0780fe3cca77ae47b"      //change with your vpc-id
 
   # SSH access from anywhere
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"]         //by-default it open for anywhere, RECOMMENDED to restrict to your IP
   }
 
   # HTTP access from anywhere
@@ -27,20 +27,17 @@ resource "aws_security_group" "acn_sg" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
-  }
-  tags = {
-    "FASMException" = "LKMTrainingRequirement"
-  }
+  
 }
 
 
 #EC2-Instance
 
 resource "aws_instance" "ec2_instance"{
- ami = "ami-0df8c184d5f6ae949"
+ ami = "ami-0df8c184d5f6ae949"        //change to your desired ami-id as it is amazon-linux support in "us-east-1" region.
  instance_type = "t2.micro"
  vpc_security_group_ids = [aws_security_group.acn_sg.id]
- key_name               = "demoserver"
+ key_name               = "demoserver"  // change to your key-value pair name.
  tags   = {
    "OS" = "amazon"
  }
