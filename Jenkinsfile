@@ -30,7 +30,7 @@ pipeline {
                         sh """
                             ansible-playbook -i "${INVENTORY_PATH}" playbook.yml \
                             --user ec2-user \
-                            --private-key "${PRIVATE_KEY_PATH}" \
+                            --private-key \$PRIVATE_KEY_PATH \
                             --limit target
                         """
                     }
