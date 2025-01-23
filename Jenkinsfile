@@ -5,8 +5,9 @@ pipeline {
         ANSIBLE_DIR           = 'ansible'
         INVENTORY_PATH        = './aws_ec2.yaml'
         TERRAFORM_DIR         = 'terraform'
-        AWS_DEFAULT_REGION    = 'us-east-1'                      //change to your region 
-        PRIVATE_KEY           = credentials('node_private_key') //private key stored in Jenkins credentinal. pls crosss-check credentials id
+        AWS_DEFAULT_REGION    = 'us-east-1'  // Change to your region
+        PRIVATE_KEY           = credentials('node_private_key')  // Private key stored in Jenkins credentials. Please cross-check credentials ID.
+    }
 
     stages {
         stage('Terraform') {
@@ -14,7 +15,7 @@ pipeline {
                 dir("${TERRAFORM_DIR}") {
                     echo "Running Terraform commands..."
                     sh 'terraform init'
-                    sh 'terraform validate'                       
+                    sh 'terraform validate'
                     sh 'terraform apply -auto-approve'
                 }
             }
@@ -27,17 +28,17 @@ pipeline {
                     sh 'ansible-inventory -i "${INVENTORY_PATH}" --graph'
                     echo "Installing Apache Server on EC2 Instance"
                     sh """
-                     ansible-playbook -i "${INVENTORY_PATH}" playbook.yml \
-                     --user ec2-user \
-                     --private-key "${PRIVATE_KEY}" \
-                     --limit target
-                     """
+                    ansible-playbook -i "${INVENTORY_PATH}" playbook.yml \
+                    --user ec2-user \
+                    --private-key "${PRIVATE_KEY}" \
+                    --limit target
+                    """
                 }
             }
         }
     }
 
-  post {
+    post {
         success {
             echo 'Pipeline completed successfully.'
         }
@@ -45,3 +46,5 @@ pipeline {
             echo 'Pipeline failed with Error.'
         }
     }
+}
+
