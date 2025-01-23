@@ -8,7 +8,7 @@ pipeline {
      // AWS_ACCESS_KEY_ID     = credentials('aws_access_key')
      // AWS_SECRET_ACCESS_KEY = credentials('aws_secret_key')
         AWS_DEFAULT_REGION    = 'us-east-1'      //change to your region
-    //    PRIVATE_KEY           = credentials('node_private_key') //key-value pair stored in Jenkins credentials 
+        PRIVATE_KEY           = credentials('node_private_key') //key-value pair stored in Jenkins credentials 
     }
 
     stages {
