@@ -45,4 +45,3 @@ pipeline {
             echo 'Pipeline failed with Error.'
         }
     }
-}
