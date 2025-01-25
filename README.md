@@ -11,16 +11,16 @@ This repository automates the setup of an Apache server on an EC2 instance using
 */etc/ansible/ansible.cfg*
 
  ```bash
-      [inventory]
-      enable_plugins = aws_ec2
+ [inventory]
+ enable_plugins = aws_ec2
 
-      [defaults]
-      inventory=/home/ec2-user/apache_server/ansible/aws_ec2.yaml //replace with your inventory file path
-      ansible_python_interpreter = /usr/bin/python3.9
-      host_key_checking = False
+ [defaults]
+ inventory=/home/ec2-user/apache_server/ansible/aws_ec2.yaml //replace with your inventory file path
+ ansible_python_interpreter = /usr/bin/python3.9
+ host_key_checking = False
 
-      [ssh_connection]
-      ssh_args = -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
+ [ssh_connection]
+ ssh_args = -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
  ```
 
 # Required Tools
